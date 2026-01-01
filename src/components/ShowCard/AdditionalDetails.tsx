@@ -67,16 +67,6 @@ export default function AdditionalDetails({show}: ShowCardProps) {
             </dd>
           </div>
         )}
-        {show.network && (
-          <div>
-            <dt className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">
-              Network
-            </dt>
-            <dd className="text-base text-neutral-900 dark:text-neutral-100">
-              {show.network.name} ({show.network.country.name})
-            </dd>
-          </div>
-        )}
         {show.language && (
           <div>
             <dt className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">

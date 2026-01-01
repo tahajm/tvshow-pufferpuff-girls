@@ -1,4 +1,3 @@
-
 export interface ShowData {
     id: number;
     name: string;
@@ -17,12 +16,6 @@ export interface ShowData {
     rating: {
       average: number | null;
     };
-    network: {
-      name: string;
-      country: {
-        name: string;
-      };
-    } | null;
   }
   
   export interface ShowCardProps {
