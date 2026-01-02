@@ -1,10 +1,9 @@
 import Image from "next/image";
+import parse from "html-react-parser";
 import { ShowCardProps } from "./ShowCard.types";
 import AdditionalDetails from "./AdditionalDetails";
 
 export function ShowCard({ show }: ShowCardProps) {
-  //   const cleanSummary = show.summary?.replace(/<[^>]*>/g, "") || "No description available.";
-
   return (
     <div className="w-full max-w-5xl mx-auto bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
       <div className="flex flex-col md:flex-row">
@@ -39,10 +38,9 @@ export function ShowCard({ show }: ShowCardProps) {
             <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
               Description
             </h2>
-            <div dangerouslySetInnerHTML={{ __html: show.summary }} />
-            {/* <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-              {cleanSummary}
-            </p> */}
+            <div className="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+              {show.summary ? parse(show.summary) : ""}
+            </div>
           </div>
         </div>
       </div>

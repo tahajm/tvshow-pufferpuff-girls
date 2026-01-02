@@ -1,11 +1,9 @@
 import Image from "next/image";
+import parse from "html-react-parser";
 import { EpisodeDetailProps } from "./EpisodeDetail.types";
 import { CalendarIcon, ClockIcon } from "@/components/icons";
 
 export function EpisodeDetail({ episode }: EpisodeDetailProps) {
-  const cleanSummary =
-    episode.summary?.replace(/<[^>]*>/g, "") || "No description available.";
-
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
@@ -60,9 +58,9 @@ export function EpisodeDetail({ episode }: EpisodeDetailProps) {
             <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
               Summary
             </h2>
-            <p className="text-base md:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
-              {cleanSummary}
-            </p>
+            <div className="text-base md:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
+              {episode.summary ? parse(episode.summary) : ""}
+            </div>
           </div>
         </div>
       </div>

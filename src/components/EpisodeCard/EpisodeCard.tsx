@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import parse from "html-react-parser";
 import { VideoIcon } from "@/components/icons";
 import { Episode } from "../ShowEpisodes";
 
@@ -10,9 +12,6 @@ export function EpisodeCard({
   episode: Episode;
   showId: number;
 }) {
-  const cleanSummary =
-    episode.summary?.replace(/<[^>]*>/g, "") || "No description available.";
-
   return (
     <Link href={`/shows/${showId}/episodes/${episode.id}`}>
       <div className="group bg-neutral-50 dark:bg-neutral-800 rounded-lg overflow-hidden cursor-pointer hover:shadow-md transition-all duration-200 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600">
@@ -60,9 +59,9 @@ export function EpisodeCard({
             )}
           </div>
 
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3">
-            {cleanSummary}
-          </p>
+          <div className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3">
+            {episode.summary ? parse(episode.summary) : ""}
+          </div>
         </div>
       </div>
     </Link>
