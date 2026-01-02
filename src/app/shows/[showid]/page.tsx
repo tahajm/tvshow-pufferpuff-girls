@@ -2,10 +2,10 @@ import { ShowCard, ShowEpisodes } from "@/components";
 export default async function Home({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ showid: string }>;
 }) {
-  const { id } = await params;
-  const URL = `https://api.tvmaze.com/shows/${id}`;
+  const { showid } = await params;
+  const URL = `https://api.tvmaze.com/shows/${showid}`;
   const response = await fetch(URL, {
     cache: "force-cache",
   });
