@@ -1,6 +1,6 @@
 import { ShowCardProps } from "./ShowCard.types";
 
-export default function AdditionalDetails({show}: ShowCardProps) {
+export default function AdditionalDetails({ show }: ShowCardProps) {
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-6">

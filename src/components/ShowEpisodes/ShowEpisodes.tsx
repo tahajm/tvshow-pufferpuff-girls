@@ -9,7 +9,7 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
     queryKey: ["showEpisodes", showId],
     queryFn: async () => {
       const response = await fetch(
-        `https://api.tvmaze.com/shows/${showId}/episodes`
+        `https://api.tvmaze.com/shows/${showId}/episodes`,
       );
       if (!response.ok) {
         throw new Error("Failed to fetch episodes");

@@ -2,9 +2,8 @@ import Image from "next/image";
 import { ShowCardProps } from "./ShowCard.types";
 import AdditionalDetails from "./AdditionalDetails";
 
-
 export function ShowCard({ show }: ShowCardProps) {
-//   const cleanSummary = show.summary?.replace(/<[^>]*>/g, "") || "No description available.";
+  //   const cleanSummary = show.summary?.replace(/<[^>]*>/g, "") || "No description available.";
 
   return (
     <div className="w-full max-w-5xl mx-auto bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
@@ -23,7 +22,9 @@ export function ShowCard({ show }: ShowCardProps) {
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-[400px] bg-neutral-200 dark:bg-neutral-700">
-              <span className="text-neutral-500 dark:text-neutral-400">No image available</span>
+              <span className="text-neutral-500 dark:text-neutral-400">
+                No image available
+              </span>
             </div>
           )}
         </div>
@@ -33,7 +34,7 @@ export function ShowCard({ show }: ShowCardProps) {
             {show.name}
           </h1>
 
-          <AdditionalDetails show={show}/>
+          <AdditionalDetails show={show} />
           <div>
             <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-3">
               Description
@@ -48,4 +49,3 @@ export function ShowCard({ show }: ShowCardProps) {
     </div>
   );
 }
-

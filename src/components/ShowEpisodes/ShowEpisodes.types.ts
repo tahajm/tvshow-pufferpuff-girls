@@ -15,4 +15,3 @@ export interface Episode {
 export interface ShowEpisodesProps {
   showId: number;
 }
-

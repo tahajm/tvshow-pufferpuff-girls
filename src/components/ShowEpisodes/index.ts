@@ -1,2 +1,2 @@
-export * from './ShowEpisodes';
-export type { Episode, ShowEpisodesProps } from './ShowEpisodes.types';
+export * from "./ShowEpisodes";
+export type { Episode, ShowEpisodesProps } from "./ShowEpisodes.types";
