@@ -3,7 +3,6 @@ import { ShowCardProps } from "./ShowCard.types";
 export default function AdditionalDetails({show}: ShowCardProps) {
   return (
     <div>
-      {/* Meta Information */}
       <div className="flex flex-wrap gap-2 mb-6">
         {show.genres && show.genres.length > 0 && (
           <div className="flex gap-2">
@@ -27,7 +26,6 @@ export default function AdditionalDetails({show}: ShowCardProps) {
         )}
       </div>
 
-      {/* Additional Info Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 pb-6 border-b border-neutral-200 dark:border-neutral-700">
         {show.premiered && (
           <div>
