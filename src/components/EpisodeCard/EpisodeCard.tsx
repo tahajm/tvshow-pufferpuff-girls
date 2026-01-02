@@ -14,7 +14,7 @@ export function EpisodeCard({
 }) {
   return (
     <Link href={`/shows/${showId}/episodes/${episode.id}`}>
-      <div className="group bg-neutral-50 dark:bg-neutral-800 rounded-lg overflow-hidden cursor-pointer hover:shadow-md transition-all duration-200 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600">
+      <div className="h-full group bg-neutral-50 dark:bg-neutral-800 rounded-lg overflow-hidden cursor-pointer hover:shadow-md transition-all duration-200 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600">
         <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700 overflow-hidden">
           {episode.image ? (
             <Image
