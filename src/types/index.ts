@@ -16,6 +16,15 @@ export interface TVShow {
   rating: {
     average: number | null;
   };
+  network: {
+    name: string;
+    country: {
+      name: string;
+    };
+  } | null;
+  webChannel: {
+    name: string;
+  } | null;
 }
 
 export interface Episode {
