@@ -13,8 +13,10 @@ export default async function Home({
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 py-8 px-4 md:py-12 md:px-6 space-y-8">
-      <ShowCard show={data} />
-      <ShowEpisodes showId={data.id} />
+      <main id="main-content" className="space-y-8">
+        <ShowCard show={data} />
+        <ShowEpisodes showId={data.id} />
+      </main>
     </div>
   );
 }
