@@ -5,6 +5,7 @@ export function ClockIcon({ className = "w-4 h-4" }: { className?: string }) {
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      aria-hidden
     >
       <path
         strokeLinecap="round"

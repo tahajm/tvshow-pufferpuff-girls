@@ -5,10 +5,10 @@ import { CalendarIcon, ClockIcon } from "@/components/icons";
 
 export function EpisodeDetail({ episode }: EpisodeDetailProps) {
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <article className="w-full max-w-5xl mx-auto">
       <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
         {episode.image && (
-          <div className="relative w-full aspect-video bg-neutral-200 dark:bg-neutral-800">
+          <figure className="relative w-full aspect-video bg-neutral-200 dark:bg-neutral-800">
             <Image
               src={episode.image.original}
               alt={episode.name}
@@ -17,14 +17,19 @@ export function EpisodeDetail({ episode }: EpisodeDetailProps) {
               priority
               sizes="(max-width: 1280px) 100vw, 1280px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+              aria-hidden
+            />
 
-            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6">
-              <span className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-bold bg-black/70 text-white backdrop-blur-sm">
-                Season {episode.season} • Episode {episode.number}
-              </span>
-            </div>
-          </div>
+            <figcaption className="absolute bottom-4 left-4 px-4 py-2 rounded-lg text-sm font-bold bg-black/70 text-white">
+              Season {episode.season}{" "}
+              <span aria-hidden className="mx-2">
+                •
+              </span>{" "}
+              Episode {episode.number}
+            </figcaption>
+          </figure>
         )}
 
         <div className="p-6 md:p-8 lg:p-10">
@@ -36,34 +41,47 @@ export function EpisodeDetail({ episode }: EpisodeDetailProps) {
             {episode.airdate && (
               <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                 <CalendarIcon />
-                <span className="font-medium">
+                <time className="font-medium" dateTime={episode.airdate}>
                   {new Date(episode.airdate).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
                   })}
-                </span>
+                </time>
               </div>
             )}
 
             {episode.runtime && (
               <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                 <ClockIcon />
-                <span className="font-medium">{episode.runtime} minutes</span>
+                <time
+                  className="font-medium"
+                  dateTime={`PT${episode.runtime}M`}
+                >
+                  <span className="sr-only">Runtime: </span>
+                  {episode.runtime} minutes
+                </time>
               </div>
             )}
           </div>
 
-          <div>
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+          <section aria-labelledby="summary-heading">
+            <h2
+              id="summary-heading"
+              className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4"
+            >
               Summary
             </h2>
             <div className="text-base md:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
-              {episode.summary ? parse(episode.summary) : ""}
+              {episode.summary ? (
+                parse(episode.summary)
+              ) : (
+                <p>No summary available for this episode.</p>
+              )}
             </div>
-          </div>
+          </section>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
