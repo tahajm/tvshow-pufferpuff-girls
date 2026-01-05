@@ -1,9 +1,9 @@
 import Image from "next/image";
 import parse from "html-react-parser";
+import { stripHtmlTags } from "@/utils";
 import { ShowCardProps } from "./ShowCard.types";
 
 export function ShowCard({ show }: Readonly<ShowCardProps>) {
-  const plainSummary = show.summary.replaceAll(/<[^>]*>/g, "");
   return (
     <article className="w-full max-w-5xl mx-auto bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
       <div className="flex flex-col md:flex-row">
@@ -16,6 +16,7 @@ export function ShowCard({ show }: Readonly<ShowCardProps>) {
                 fill
                 className="object-cover"
                 priority
+                fetchPriority="high"
                 sizes="(max-width: 768px) 100vw, 320px"
               />
             </div>
@@ -145,7 +146,7 @@ export function ShowCard({ show }: Readonly<ShowCardProps>) {
             <div className="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
               {show.summary ? (
                 <>
-                  <p className="sr-only">{plainSummary}</p>
+                  <p className="sr-only">{stripHtmlTags(show.summary)}</p>
                   <div aria-hidden="true">{parse(show.summary)}</div>
                 </>
               ) : (
