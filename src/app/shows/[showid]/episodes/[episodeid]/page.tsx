@@ -1,7 +1,31 @@
+import { cache } from "react";
 import { EpisodeDetail } from "@/components";
 import { ArrowLeftIcon } from "@/components/icons";
 import Link from "next/link";
 import { getEpisodeById } from "@/lib/showsApi";
+import { cleanAndShorten } from "@/utils";
+import type { Metadata } from "next";
+
+const getCachedEpisode = cache(getEpisodeById);
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ episodeid: string; showid: string }>;
+}): Promise<Metadata> {
+  const { episodeid } = await params;
+  const episode = await getCachedEpisode(episodeid);
+
+  const title = `${episode.name} - S${episode.season}E${episode.number}`;
+  const description = episode.summary
+    ? cleanAndShorten(episode.summary, 160)
+    : "";
+
+  return {
+    title,
+    description,
+  };
+}
 
 export default async function EpisodeDetailPage({
   params,
@@ -9,7 +33,7 @@ export default async function EpisodeDetailPage({
   params: Promise<{ episodeid: string; showid: string }>;
 }) {
   const { episodeid, showid } = await params;
-  const data = await getEpisodeById(episodeid);
+  const data = await getCachedEpisode(episodeid);
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 py-8 px-4 md:py-12 md:px-6">
