@@ -13,15 +13,15 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
 
   if (error) {
     return (
-      <section 
+      <section
         className="w-full max-w-5xl mx-auto mt-8"
         aria-labelledby="episodes-error-heading"
       >
-        <div 
+        <div
           className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6"
           role="alert"
         >
-          <h3 
+          <h3
             id="episodes-error-heading"
             className="text-lg font-semibold text-red-900 dark:text-red-200 mb-2"
           >
@@ -37,20 +37,20 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
 
   if (isLoading) {
     return (
-      <section 
+      <section
         className="w-full max-w-5xl mx-auto mt-8"
         aria-labelledby="episodes-loading-heading"
         aria-busy="true"
       >
         <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden p-6 md:p-8">
-          <div 
+          <div
             className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded w-48 mb-6 animate-pulse"
             role="status"
             aria-label="Loading episodes"
           >
             <span className="sr-only">Loading episodes...</span>
           </div>
-          <div 
+          <div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             aria-label="Episode cards loading"
           >
@@ -75,12 +75,12 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
 
   if (!data || data.length === 0) {
     return (
-      <section 
+      <section
         className="w-full max-w-5xl mx-auto mt-8"
         aria-labelledby="episodes-heading"
       >
         <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden p-6 md:p-8">
-          <h2 
+          <h2
             id="episodes-heading"
             className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-neutral-50 mb-4"
           >
@@ -95,22 +95,22 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
   }
 
   return (
-    <section 
+    <section
       className="w-full max-w-5xl mx-auto mt-8"
       aria-labelledby="episodes-heading"
     >
       <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden p-6 md:p-8">
-        <h2 
+        <h2
           id="episodes-heading"
           className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-neutral-50 mb-6"
         >
           Episodes
         </h2>
 
-        <div 
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           role="list"
-          aria-label={`${data.length} episode${data.length === 1 ? '' : 's'} available`}
+          aria-label={`${data.length} episode${data.length === 1 ? "" : "s"} available`}
         >
           {data.map((episode) => (
             <div key={episode.id} role="listitem">
