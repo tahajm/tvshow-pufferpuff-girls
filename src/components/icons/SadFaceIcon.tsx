@@ -1,7 +1,7 @@
 export function SadFaceIcon({
   className = "w-10 h-10 text-blue-600 dark:text-blue-400",
 }: {
-  className: string;
+  className?: string;
 }) {
   return (
     <svg
@@ -9,6 +9,7 @@ export function SadFaceIcon({
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      aria-hidden="true"
     >
       <path
         strokeLinecap="round"
