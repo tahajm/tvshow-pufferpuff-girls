@@ -3,19 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { EpisodeCard } from "@/components";
 import { Episode } from "@/types";
 import { ShowEpisodesProps } from "./ShowEpisodes.types";
+import { getShowEpisodes } from "@/lib/showsApi";
 
 export function ShowEpisodes({ showId }: ShowEpisodesProps) {
   const { error, data, isLoading } = useQuery<Episode[]>({
     queryKey: ["showEpisodes", showId],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://api.tvmaze.com/shows/${showId}/episodes`,
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch episodes");
-      }
-      return await response.json();
-    },
+    queryFn: () => getShowEpisodes(showId),
   });
 
   if (error) {

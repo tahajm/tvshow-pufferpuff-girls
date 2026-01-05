@@ -1,6 +1,7 @@
 import { EpisodeDetail } from "@/components";
 import { ArrowLeftIcon } from "@/components/icons";
 import Link from "next/link";
+import { getEpisodeById } from "@/lib/showsApi";
 
 export default async function EpisodeDetailPage({
   params,
@@ -8,11 +9,7 @@ export default async function EpisodeDetailPage({
   params: Promise<{ episodeid: string; showid: string }>;
 }) {
   const { episodeid, showid } = await params;
-  const URL = `https://api.tvmaze.com/episodes/${episodeid}`;
-  const response = await fetch(URL, {
-    cache: "force-cache",
-  });
-  const data = await response.json();
+  const data = await getEpisodeById(episodeid);
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 py-8 px-4 md:py-12 md:px-6">
