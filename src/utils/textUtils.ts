@@ -5,7 +5,7 @@ export function stripHtmlTags(html: string): string {
 export function shortenText(
   text: string,
   maxLength: number,
-  addEllipsis = true,
+  addEllipsis = true
 ): string {
   if (text.length <= maxLength) return text;
   const shortened = text.slice(0, maxLength);

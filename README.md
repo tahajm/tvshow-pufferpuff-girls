@@ -5,6 +5,7 @@ A modern web application built with Next.js that allows users to explore TV show
 ## 🚀 Setup Instructions
 
 ### Prerequisites
+
 - Node.js 20.x or higher
 - npm or yarn
 
@@ -40,12 +41,14 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ### Server vs Client Components
 
 **Show Details Page** (`/shows/[showid]`) - **Server Component**
+
 - Leverages React Server Components for initial data fetching
 - Benefits: Better SEO, faster initial load, reduced JavaScript bundle size
 - Uses React's `cache()` for request deduplication between page render and `generateMetadata`
 - Server-side rendering with ISR (Incremental Static Regeneration)
 
 **Episodes List** - **Client Component**
+
 - **Critical Decision**: Shows like The Powerpuff Girls can have 200+ episodes, and some shows have thousands
 - Server-rendering large lists would significantly slow down the initial page load and block rendering
 - Client-side fetching with TanStack Query enables:
@@ -58,6 +61,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ### Data Fetching Strategy
 
 **Server-Side (Next.js)**
+
 - API functions in `src/lib/showsApi.ts` with Next.js fetch and ISR
 - Revalidation strategy based on data volatility:
   - Shows: 24 hours (metadata changes infrequently)
@@ -65,28 +69,33 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
   - Individual episodes: 30 days (historical data rarely changes)
 
 **Client-Side (TanStack Query)**
+
 - Stale-while-revalidate pattern with 60s stale time
 - Automatic background refetching
 - Request deduplication and caching
 - Optimistic updates ready for future features (favorites)
 
 ### Type Safety
+
 - Comprehensive TypeScript types in `src/types/index.ts`
 - Strict null checking and proper type narrowing throughout
 - Type-safe API responses with full IntelliSense support
 
 ### Component Architecture
+
 - Modular structure with co-located types, tests, and components
 - Separation of concerns: presentational components vs container logic
 - Barrel exports for clean imports
 - Consistent naming conventions
 
 ### Design System Choice
+
 **Note on Atlassian Design System**: The assignment specifies using Atlassian Design System, however `@atlaskit` packages require `react@^18.2.0` while this project uses React 19.2.3 (required by Next.js 16). Attempting to install results in peer dependency conflicts. Instead, I implemented a custom design system with Tailwind CSS following similar design principles (8px grid, semantic colors, accessible patterns).
 
 ## ⚖️ Key Trade-offs
 
 ### Episodes as Client Component
+
 - **Trade-off**: Server-rendering would provide better SEO for individual episodes
 - **Decision**: Client component with TanStack Query
 - **Reasoning**:
@@ -97,6 +106,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 - **Outcome**: Show information loads instantly, episodes stream in progressively
 
 ### Caching Strategy
+
 - **Trade-off**: Fresh data vs API performance
 - **Decision**: Conservative cache times (24h/7d/30d)
 - **Reasoning**: TV show data is stable; aggressive caching reduces API load without sacrificing freshness
@@ -105,10 +115,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## ✅ Testing Coverage
 
 ### Unit Tests
+
 - **API Layer** (`src/lib/showsApi.test.ts`): API functions, error handling, response parsing
 - **Utilities** (`src/utils/textUtils.test.ts`): HTML stripping, text truncation, edge cases
 
 ### Component Tests
+
 - **ShowEpisodes** (`src/components/ShowEpisodes/ShowEpisodes.test.tsx`):
   - Loading states (skeleton UI)
   - Error states with user-friendly messages
@@ -117,6 +129,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
   - Async flow with mocked TanStack Query
 
 ### Running Tests
+
 ```bash
 npm test              # Watch mode
 ```
@@ -124,11 +137,13 @@ npm test              # Watch mode
 ## ♿ Accessibility Features
 
 ### Semantic HTML
+
 - Proper use of semantic elements: `<article>`, `<section>`, `<nav>`, `<main>`, `<time>`, `<figure>`
 - Logical heading hierarchy (h1 → h2 → h3)
 - Descriptive landmarks for screen reader navigation
 
 ### ARIA Attributes
+
 - `aria-label` for meaningful context on interactive elements
 - `aria-labelledby` for associating headings with regions
 - `aria-hidden` for decorative elements
@@ -136,18 +151,21 @@ npm test              # Watch mode
 - `aria-live` regions for dynamic content updates
 
 ### Keyboard Navigation
+
 - All interactive elements are keyboard accessible (Tab, Enter, Space)
 - Visible focus states with custom focus rings
 - Focus management for page navigation
 - No keyboard traps
 
 ### Screen Reader Support
+
 - `.sr-only` utility class for screen-reader-only text
 - Descriptive alt text for all images
 - Contextual labels for time elements
 - Proper button and link text
 
 ### Additional Considerations
+
 - WCAG AA color contrast compliance
 - Dark mode support with system preference detection
 - Responsive text sizing (rem units)
@@ -157,24 +175,29 @@ npm test              # Watch mode
 ## 🔮 What Would Be Improved With More Time
 
 ### Features
+
 1. **Search & Filtering**: Real-time episode search, season/year filters
 2. **Favorites System**: Server Action to persist favorite episodes (localStorage or database)
 3. **Pagination**: Infinite scroll or traditional pagination
 
 ### Testing
+
 1. **E2E Tests**: Playwright tests for critical user journeys
 2. **More Component Coverage**: Test EpisodeCard, ShowCard, EpisodeDetail components
 
 ### Performance
+
 1. **Route Prefetching**: Aggressive link prefetching on hover
 2. **Image Placeholders**: LQIP (Low Quality Image Placeholders) with blur effect
 
 ### Code Quality
+
 1. **Branded Types**: More strict TypeScript types (branded IDs, discriminated unions)
 2. **Error Boundaries**: Granular error boundaries per section
 3. **Monitoring**: Error tracking (Sentry) and analytics
 
 ### Accessibility
+
 3. **Skip Links**: Skip to main content navigation
 
 ## 📁 Project Structure
@@ -204,23 +227,28 @@ src/
 ## 🛠️ Technologies Used
 
 ### Core
+
 - **Next.js** 16.1.1 - React framework with App Router
 - **React** 19.2.3 - UI library with Server Components
 - **TypeScript** 5.x - Type safety
 - **Tailwind CSS** 4.x - Utility-first CSS (zero-runtime)
 
 ### State & Data Fetching
+
 - **TanStack Query** 5.90.16 - Client-side data fetching and caching
 
 ### Utilities
+
 - **html-react-parser** 5.2.11 - Safe HTML parsing for API responses
 
 ### Testing
+
 - **Vitest** 4.0.16 - Fast unit test framework
 - **Testing Library** 16.3.1 - Component testing utilities
 - **jsdom** 27.4.0 - DOM implementation for tests
 
 ### Code Quality
+
 - **ESLint** 9.x - Linting with Next.js config
 - **Prettier** 3.7.4 - Code formatting
 
@@ -229,7 +257,7 @@ src/
 This project uses the [TVMaze API](http://www.tvmaze.com/api) for TV show and episode data.
 
 **Endpoints Used:**
+
 - `GET /shows/:id` - Show details
 - `GET /shows/:id/episodes` - Show episodes list
 - `GET /episodes/:id` - Individual episode details
-

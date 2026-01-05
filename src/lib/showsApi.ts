@@ -24,7 +24,7 @@ export async function getShow(showId: number | string): Promise<TVShow> {
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch show: ${response.status} ${response.statusText}`,
+      `Failed to fetch show: ${response.status} ${response.statusText}`
     );
   }
 
@@ -32,7 +32,7 @@ export async function getShow(showId: number | string): Promise<TVShow> {
 }
 
 export async function getShowEpisodes(
-  showId: number | string,
+  showId: number | string
 ): Promise<Episode[]> {
   const response = await fetch(API_ENDPOINTS.showEpisodes(showId), {
     next: { revalidate: REVALIDATION_TIME.episodes },
@@ -40,7 +40,7 @@ export async function getShowEpisodes(
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch episodes: ${response.status} ${response.statusText}`,
+      `Failed to fetch episodes: ${response.status} ${response.statusText}`
     );
   }
 
@@ -48,7 +48,7 @@ export async function getShowEpisodes(
 }
 
 export async function getEpisodeById(
-  episodeId: number | string,
+  episodeId: number | string
 ): Promise<Episode> {
   const response = await fetch(API_ENDPOINTS.episode(episodeId), {
     next: { revalidate: REVALIDATION_TIME.episode },
@@ -56,7 +56,7 @@ export async function getEpisodeById(
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch episode: ${response.status} ${response.statusText}`,
+      `Failed to fetch episode: ${response.status} ${response.statusText}`
     );
   }
 

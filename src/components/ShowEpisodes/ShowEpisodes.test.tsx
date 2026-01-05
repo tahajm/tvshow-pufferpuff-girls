@@ -98,7 +98,9 @@ describe("ShowEpisodes", () => {
 
     expect(screen.getByText("Episodes")).toBeInTheDocument();
 
-    expect(screen.getByText("No episodes available for this show.")).toBeInTheDocument();
+    expect(
+      screen.getByText("No episodes available for this show.")
+    ).toBeInTheDocument();
   });
 
   test("displays episodes successfully when data is loaded", async () => {
@@ -124,4 +126,3 @@ describe("ShowEpisodes", () => {
     expect(screen.getByText("S1 E2")).toBeInTheDocument();
   });
 });
-
