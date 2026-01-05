@@ -21,16 +21,10 @@ export function ShowCard({ show }: Readonly<ShowCardProps>) {
             </div>
           </div>
         ) : (
-          <div
-            className="w-full md:w-80 flex-shrink-0 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center min-h-[400px]"
-            role="img"
-            aria-label="No image available for this show"
-          >
-            <div className="flex items-center justify-center h-full bg-neutral-200 dark:bg-neutral-700">
-              <span className="text-neutral-500 dark:text-neutral-400">
-                No image available
-              </span>
-            </div>
+          <div className="w-full md:w-80 flex-shrink-0 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center min-h-[400px]">
+            <span className="text-neutral-500 dark:text-neutral-400">
+              No image available
+            </span>
           </div>
         )}
 
