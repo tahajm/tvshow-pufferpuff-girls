@@ -81,6 +81,9 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 - Barrel exports for clean imports
 - Consistent naming conventions
 
+### Design System Choice
+**Note on Atlassian Design System**: The assignment specifies using Atlassian Design System, however `@atlaskit` packages require `react@^18.2.0` while this project uses React 19.2.3 (required by Next.js 16). Attempting to install results in peer dependency conflicts. Instead, I implemented a custom design system with Tailwind CSS following similar design principles (8px grid, semantic colors, accessible patterns).
+
 ## ⚖️ Key Trade-offs
 
 ### Episodes as Client Component
