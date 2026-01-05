@@ -1,1 +1,3 @@
 export const DEFAULT_SHOW_ID = 6771;
+
+export const META_DESCRIPTION_MAX_LENGTH = 160;

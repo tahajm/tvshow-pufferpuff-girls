@@ -2,6 +2,7 @@ import { cache } from "react";
 import { ShowCard, ShowEpisodes } from "@/components";
 import { getShow } from "@/lib/showsApi";
 import { cleanAndShorten } from "@/utils";
+import { META_DESCRIPTION_MAX_LENGTH } from "@/constants";
 import type { Metadata } from "next";
 
 const getCachedShow = cache(getShow);
@@ -14,7 +15,9 @@ export async function generateMetadata({
   const { showid } = await params;
   const data = await getCachedShow(showid);
 
-  const description = data.summary ? cleanAndShorten(data.summary, 160) : "";
+  const description = data.summary
+    ? cleanAndShorten(data.summary, META_DESCRIPTION_MAX_LENGTH)
+    : "";
 
   return {
     title: data.name,

@@ -4,6 +4,7 @@ import { ArrowLeftIcon } from "@/components/icons";
 import Link from "next/link";
 import { getEpisodeById } from "@/lib/showsApi";
 import { cleanAndShorten } from "@/utils";
+import { META_DESCRIPTION_MAX_LENGTH } from "@/constants";
 import type { Metadata } from "next";
 
 const getCachedEpisode = cache(getEpisodeById);
@@ -18,7 +19,7 @@ export async function generateMetadata({
 
   const title = `${episode.name} - S${episode.season}E${episode.number}`;
   const description = episode.summary
-    ? cleanAndShorten(episode.summary, 160)
+    ? cleanAndShorten(episode.summary, META_DESCRIPTION_MAX_LENGTH)
     : "";
 
   return {
