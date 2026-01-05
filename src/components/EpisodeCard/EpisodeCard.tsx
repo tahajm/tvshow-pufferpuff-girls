@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import parse from "html-react-parser";
 import { VideoIcon } from "@/components/icons";
-import { Episode } from "../ShowEpisodes";
+import { Episode } from "@/types";
 
 export function EpisodeCard({
   episode,
@@ -12,24 +11,37 @@ export function EpisodeCard({
   episode: Episode;
   showId: number;
 }) {
+  const cleanSummary = episode.summary?.replace(/<[^>]*>/g, "") || "";
+
   return (
-    <Link href={`/shows/${showId}/episodes/${episode.id}`}>
-      <div className="h-full group bg-neutral-50 dark:bg-neutral-800 rounded-lg overflow-hidden cursor-pointer hover:shadow-md transition-all duration-200 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600">
+    <article>
+      <Link 
+        href={`/shows/${showId}/episodes/${episode.id}`}
+        className="block h-full group bg-neutral-50 dark:bg-neutral-800 rounded-lg overflow-hidden hover:shadow-md transition-all duration-200 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        aria-label={`View episode: ${episode.name}, Season ${episode.season} Episode ${episode.number}`}
+      >
         <div className="relative aspect-video bg-neutral-200 dark:bg-neutral-700 overflow-hidden">
           {episode.image ? (
             <Image
               src={episode.image.medium}
-              alt={episode.name}
+              alt={`${episode.name} episode thumbnail`}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
-            <div className="flex items-center justify-center h-full">
-              <VideoIcon className="w-12 h-12 text-neutral-400 dark:text-neutral-600" />
+            <div 
+              className="flex items-center justify-center h-full"
+              role="img"
+              aria-label="No thumbnail available"
+            >
+              <VideoIcon className="w-12 h-12 text-neutral-400 dark:text-neutral-600" aria-hidden="true" />
             </div>
           )}
-          <div className="absolute top-2 left-2">
+          <div 
+            className="absolute top-2 left-2"
+            aria-hidden="true"
+          >
             <span className="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-black/70 text-white backdrop-blur-sm">
               S{episode.season} E{episode.number}
             </span>
@@ -37,33 +49,38 @@ export function EpisodeCard({
         </div>
 
         <div className="p-4">
-          <h4 className="font-semibold text-neutral-900 dark:text-neutral-50 mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          <h3 className="font-semibold text-neutral-900 dark:text-neutral-50 mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {episode.name}
-          </h4>
+          </h3>
 
           <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-3">
             {episode.airdate && (
-              <span>
+              <time dateTime={episode.airdate}>
                 {new Date(episode.airdate).toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
                   year: "numeric",
                 })}
-              </span>
+              </time>
             )}
             {episode.runtime && (
               <>
-                <span>•</span>
-                <span>{episode.runtime} min</span>
+                <span aria-hidden="true">•</span>
+                <time dateTime={`PT${episode.runtime}M`}>
+                  <span className="sr-only">Runtime: </span>
+                  {episode.runtime} min
+                </time>
               </>
             )}
           </div>
 
-          <div className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3">
-            {episode.summary ? parse(episode.summary) : ""}
-          </div>
+          {cleanSummary && (
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3">
+              {cleanSummary}
+            </p>
+          )}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </article>
   );
 }
