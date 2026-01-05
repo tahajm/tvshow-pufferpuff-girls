@@ -4,8 +4,9 @@ import { EpisodeCard } from "@/components";
 import { Episode } from "@/types";
 import { ShowEpisodesProps } from "./ShowEpisodes.types";
 import { getShowEpisodes } from "@/lib/showsApi";
+import { EpisodesLoadingSkeleton } from "./EpisodesLoadingSkeleton";
 
-export function ShowEpisodes({ showId }: ShowEpisodesProps) {
+export function ShowEpisodes({ showId }: Readonly<ShowEpisodesProps>) {
   const { error, data, isLoading } = useQuery<Episode[]>({
     queryKey: ["showEpisodes", showId],
     queryFn: () => getShowEpisodes(showId),
@@ -36,41 +37,7 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
   }
 
   if (isLoading) {
-    return (
-      <section
-        className="w-full max-w-5xl mx-auto mt-8"
-        aria-labelledby="episodes-loading-heading"
-        aria-busy="true"
-      >
-        <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden p-6 md:p-8">
-          <div
-            className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded w-48 mb-6 animate-pulse"
-            role="status"
-            aria-label="Loading episodes"
-          >
-            <span className="sr-only">Loading episodes...</span>
-          </div>
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-            aria-label="Episode cards loading"
-          >
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="bg-neutral-100 dark:bg-neutral-800 rounded-lg overflow-hidden animate-pulse"
-                aria-hidden="true"
-              >
-                <div className="aspect-video bg-neutral-200 dark:bg-neutral-700" />
-                <div className="p-4 space-y-3">
-                  <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
-                  <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
+    return <EpisodesLoadingSkeleton />;
   }
 
   if (!data || data.length === 0) {
@@ -107,17 +74,16 @@ export function ShowEpisodes({ showId }: ShowEpisodesProps) {
           Episodes
         </h2>
 
-        <div
+        <ul
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-          role="list"
           aria-label={`${data.length} episode${data.length === 1 ? "" : "s"} available`}
         >
           {data.map((episode) => (
-            <div key={episode.id} role="listitem">
+            <li key={episode.id}>
               <EpisodeCard showId={showId} episode={episode} />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
