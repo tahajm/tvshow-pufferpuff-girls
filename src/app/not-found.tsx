@@ -5,11 +5,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center px-4">
       <main className="w-full max-w-2xl">
-        <div
-          className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 md:p-12 text-center"
-          role="status"
-          aria-live="polite"
-        >
+        <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 md:p-12 text-center">
           <div className="flex justify-center mb-6" aria-hidden="true">
             <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
               <SadFaceIcon />

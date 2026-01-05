@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import { EpisodeDetailProps } from "./EpisodeDetail.types";
 import { CalendarIcon, ClockIcon } from "@/components/icons";
 
-export function EpisodeDetail({ episode }: EpisodeDetailProps) {
+export function EpisodeDetail({ episode }: Readonly<EpisodeDetailProps>) {
   return (
     <article className="w-full max-w-5xl mx-auto">
       <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
@@ -51,7 +51,7 @@ export function EpisodeDetail({ episode }: EpisodeDetailProps) {
               </div>
             )}
 
-            {episode.runtime && (
+            {episode.runtime ? (
               <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                 <ClockIcon />
                 <time
@@ -62,7 +62,7 @@ export function EpisodeDetail({ episode }: EpisodeDetailProps) {
                   {episode.runtime} minutes
                 </time>
               </div>
-            )}
+            ) : null}
           </div>
 
           <section aria-labelledby="summary-heading">

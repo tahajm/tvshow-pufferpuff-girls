@@ -8,10 +8,10 @@ import { stripHtmlTags } from "@/utils";
 export function EpisodeCard({
   episode,
   showId,
-}: {
+}: Readonly<{
   episode: Episode;
   showId: number;
-}) {
+}>) {
   return (
     <article>
       <Link
@@ -29,11 +29,7 @@ export function EpisodeCard({
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
-            <div
-              className="flex items-center justify-center h-full"
-              role="img"
-              aria-label="No thumbnail available"
-            >
+            <div className="flex items-center justify-center h-full">
               <VideoIcon
                 className="w-12 h-12 text-neutral-400 dark:text-neutral-600"
                 aria-hidden="true"
@@ -62,7 +58,7 @@ export function EpisodeCard({
                 })}
               </time>
             )}
-            {episode.runtime && (
+            {episode.runtime ? (
               <>
                 <span aria-hidden="true">•</span>
                 <time dateTime={`PT${episode.runtime}M`}>
@@ -70,7 +66,7 @@ export function EpisodeCard({
                   {episode.runtime} min
                 </time>
               </>
-            )}
+            ) : null}
           </div>
 
           {episode.summary && (
