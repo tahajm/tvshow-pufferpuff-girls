@@ -15,6 +15,10 @@ A modern web application built with Next.js that allows users to explore TV show
 # Install dependencies
 npm install
 
+# (Optional) Configure environment variables
+# Copy .env.example to .env.local and customize if needed
+cp .env.example .env
+
 # Run development server
 npm run dev
 
