@@ -50,6 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 - Benefits: Better SEO, faster initial load, reduced JavaScript bundle size
 - Uses React's `cache()` for request deduplication between page render and `generateMetadata`
 - Server-side rendering with ISR (Incremental Static Regeneration)
+- Uses `generateStaticParams` to pre-build the default show at build time for instant loads; episode pages remain dynamic (SSR) due to scale (200+ episodes) and lack of clear prioritization criteria
 
 **Episodes List** - **Client Component**
 

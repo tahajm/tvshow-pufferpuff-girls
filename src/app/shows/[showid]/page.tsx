@@ -2,7 +2,7 @@ import { cache } from "react";
 import { ShowCard, ShowEpisodes } from "@/components";
 import { getShow } from "@/lib/showsApi";
 import { cleanAndShorten } from "@/utils";
-import { META_DESCRIPTION_MAX_LENGTH } from "@/constants";
+import { DEFAULT_SHOW_ID, META_DESCRIPTION_MAX_LENGTH } from "@/constants";
 import type { Metadata } from "next";
 
 const getCachedShow = cache(getShow);
@@ -23,6 +23,12 @@ export async function generateMetadata({
     title: data.name,
     description,
   };
+}
+
+export const revalidate = 86400; // 24 hours
+
+export async function generateStaticParams() {
+  return [{ showid: String(DEFAULT_SHOW_ID) }];
 }
 
 export default async function Home({
