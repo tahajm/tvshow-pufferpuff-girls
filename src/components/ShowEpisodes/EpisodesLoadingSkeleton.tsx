@@ -8,9 +8,12 @@ export function EpisodesLoadingSkeleton() {
       aria-busy="true"
     >
       <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden p-6 md:p-8">
-        <div className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded w-48 mb-6 animate-pulse">
+        <h2
+          id="episodes-loading-heading"
+          className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded w-48 mb-6 animate-pulse"
+        >
           <span className="sr-only">Loading episodes...</span>
-        </div>
+        </h2>
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           aria-label="Episode cards loading"
